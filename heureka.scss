@@ -1,0 +1,725 @@
+$bg: #fff;
+$maxW: 960px;
+//$menuColor: #4c805b;
+$menuColor: #e7943b; 
+$fontFam: 'Open Sans',Verdana,Geneva,sans-serif;
+$headerHeight: 100px;
+$headerHeightMobile: 60px;
+$niceOrange: #FF9600;
+$niceBlue: #26a8d6;
+@mixin vertical-centered($height) {
+	display: block;
+	height: $height;
+	top: 50%;
+	margin-top: -$height/2;
+	position: absolute;
+}
+* {
+	//margin:0;
+	//padding: 0;
+	font-family: $fontFam;
+}
+input[type="search"] {
+      -webkit-appearance: none;
+}
+
+li a {
+	color:inherit;
+	text-decoration: none;
+}
+body {
+	background-color: $bg;
+	margin: 0 auto;
+	min-height:100vh;
+}
+
+.container {
+	margin:auto;
+	box-sizing: border-box;
+	border-bottom: 1px solid darken($bg, 20%);
+	width: 100%;
+	background: darken($bg,10%);
+}
+
+header {
+	margin:auto;
+	width: $maxW;
+	height: $headerHeight - 1px;
+	@media (max-width: $maxW){
+		height: $headerHeightMobile - 1px;
+		width:100%;
+	}
+	.header-left {
+		//margin: auto 15px;
+		position: relative;
+		display: block;
+		float: left;
+		.logo {
+			float: left;
+			height: $headerHeight - 1px;
+			box-sizing: border-box;
+			$logoHeight: 67px;
+			$logoHeightMobile: 30px;
+			padding: ($headerHeight - $logoHeight)/2 10px;
+			@media (max-width: $maxW){
+				img{
+									height: $logoHeightMobile;
+				}
+				height: $headerHeightMobile - 1px;
+				padding: ($headerHeightMobile - $logoHeightMobile)/2 5px;
+				padding-left: 20px;
+			}
+		}
+		$hamburgerSize: 30px;
+		$hamburgerMargin: 5px;
+		$hamburgerLineHeight: ($hamburgerSize - $hamburgerMargin)/5;
+		.hamburger-menu-wrapper{
+			box-sizing: border-box;
+			height: $headerHeightMobile - 1px;
+			display:block;
+			float:left;
+			padding-top: ($headerHeightMobile - $hamburgerSize)/2;
+			padding-left: 10px;
+		}
+		.hamburger-menu {
+			display: none;
+			cursor: pointer;
+			float:left;
+			//margin-right: 10px;
+			position: relative;
+			overflow:hidden;
+			//top: ($headerHeightMobile - $hamburgerSize)/2;
+			width: $hamburgerSize;
+			height: $hamburgerSize;
+			@media (max-width: $maxW){
+				display: block;
+			}
+			.hamburger-line{
+				@mixin hamburgerLine(){
+					border-radius: 2px;
+					transition: 0.5s all;
+					transform-origin: 50% 50%;
+					background: #777;
+					display: block;
+					position: absolute;
+					width:$hamburgerSize - $hamburgerMargin;
+					height:$hamburgerLineHeight;
+				}
+				&-1{
+					@include hamburgerLine();
+					top: 0.5*$hamburgerMargin;
+					left:0.5*$hamburgerMargin;
+				}
+				&-2{
+					@include hamburgerLine();
+					top: 0.5*$hamburgerMargin + 2*$hamburgerLineHeight;
+					left:0.5*$hamburgerMargin;
+				}
+				&-3{
+					@include hamburgerLine();
+					top: 0.5*$hamburgerMargin + 4*$hamburgerLineHeight;
+					left:0.5*$hamburgerMargin;
+				}
+			}
+		}
+		.opened {
+			.hamburger-line{
+				$hamburgerTranslate: $hamburgerLineHeight*2;
+				&-1{
+					transform: translate(0,$hamburgerTranslate) rotate(45deg) ;
+				}
+				&-2{
+					transform: scale(0);
+				}
+				&-3{
+					transform: translate(0,-$hamburgerTranslate) rotate(-45deg) ;
+				}
+			}
+		}
+	}
+	.header-right {
+		float: right;
+		height: 100%;
+		$searchHeight: 0.4*$headerHeight;
+		$searchHeightMobile: 0.6*$headerHeightMobile;
+		.search-bar{
+			float:left;
+			position: relative;
+			top: ($headerHeight - $searchHeight)/2;
+			right: 10%;
+			height: $searchHeight;
+			@media (max-width: $maxW){
+					height: $searchHeightMobile;
+					top: ($headerHeightMobile - $searchHeightMobile)/2;
+			}
+			input[type=search]{
+				font-family:$fontFam;
+				padding: 10px;
+				float: left;
+				display: inline-block;
+				border-radius: 5px;
+				border: 1px solid darken($bg,20%);
+				box-sizing: border-box;
+				margin:0;
+				height: $searchHeight;
+				@media (max-width: $maxW){
+					height: $searchHeightMobile;
+					width:40vw;
+				}
+				@media (min-width: $maxW){
+					border-top-right-radius: 0;
+					border-right:0;
+					border-bottom-right-radius: 0;
+				}
+			}
+			button {
+				float: left;
+				display: none;
+				$searchColor: $niceOrange;
+				border-radius: 5px;
+				border: 1px solid darken($searchColor,10%);
+				background: -webkit-linear-gradient(lighten($searchColor,10%), darken($searchColor,5%));
+				background: -o-linear-gradient(lighten($searchColor,10%), darken($searchColor,5%));
+				background: linear-gradient(lighten($searchColor,10%), darken($searchColor,5%));
+				box-sizing: border-box;
+				margin:0;
+				padding:0;
+				height: $searchHeight;
+				&:hover{
+					background: -webkit-linear-gradient(lighten($searchColor,20%), $searchColor);
+					background: -o-linear-gradient(lighten($searchColor,20%), $searchColor);
+					background: linear-gradient(lighten($searchColor,20%), $searchColor);
+					cursor: pointer;
+				}
+				@media (min-width: $maxW){
+					display: inline-block;
+					border-top-left-radius: 0;
+					border-bottom-left-radius: 0;
+				}
+				img{
+					margin: 0 10px;
+					width: 20px;
+					height: 20px;
+				}
+			}
+		}		
+	}
+}
+.content-container{
+	position: relative;
+	margin:auto;
+	width: 100%;
+	.loading{
+		z-index: 150;
+		position: absolute;
+		width:100%;
+		height:100%;
+		display: block;
+		background: rgba(255,255,255,0.6);
+		img{
+			z-index: 150;
+			position: absolute;
+			top:50%;
+			left:50%;
+			transform: translate(-50%,-50%);
+			max-width:20%;
+			max-height:20%;
+		}
+	}
+}
+.content {
+	display: flex;
+	margin:auto;
+	width: $maxW;
+	min-height: calc(100vh - #{$headerHeight});
+	@media (max-width: $maxW){
+		display: block;
+		//grid-template-columns: 0 $maxW;
+		overflow: hidden;
+		min-height: calc(100vh - #{$headerHeightMobile});
+		height: calc(100vh - #{$headerHeightMobile});
+		width:100%;
+	}
+}
+$menuWidth: 200px;
+nav {
+	$navbarColor: #E9F3F5;
+	box-sizing: border-box;
+	border-right: 1px solid darken($navbarColor,10%);
+	flex: 1;
+	padding: 0;
+	margin: 0;
+	margin-left: 0;
+	display: block;
+	box-sizing: border-box;
+	width: $maxW * 0.2;
+	background-color: $navbarColor;
+	//min-height: calc(100vh - #{$headerHeight});
+	//height:100%;
+	@media (max-width: $maxW){
+		float: left;
+		width: $maxW * 0.2;
+		margin-left: -$maxW * 0.2;
+		min-height: calc(100vh - #{$headerHeightMobile});
+		height:100%;
+		overflow: auto;
+	}
+	ul {
+		height:100%;
+		margin: 0;
+		padding: 0px;
+		display: block;
+		li {
+			color: #666;
+			box-sizing: border-box;
+			$menuHeight: 50px;
+			display: inline-block;
+			width: 100%;
+			height: $menuHeight;
+			line-height: $menuHeight;
+			padding: 0 15px;
+			&:hover{
+				cursor: pointer;
+				background: linear-gradient(lighten($menuColor,10%), $menuColor);
+				color:white;
+				border-radius: 15px;
+			}
+		}
+	}
+	&.opened{
+		margin-left: 0;
+	}
+}
+
+main {
+	transition: margin 0.5s 0.1s;
+	display: block;
+	flex: 4;
+	box-sizing: border-box;
+	width: $maxW * 0.8;
+	//height: 100%;
+	//background: #aaa;
+	@media (max-width: $maxW){
+		float: left;
+		height: 100%;
+		width: 100%;
+		overflow: auto;
+	}
+	&.opened{
+		margin-right: -$maxW * 0.2;
+	}
+	.categories ul {
+		$cellWidthSet: 26;
+		//beyond editing
+		$cellCount: floor(100 / $cellWidthSet);
+		$cellMarginOut: (100 - $cellCount * $cellWidthSet) / 8;
+		$cellWidth: 100/(100-$cellMarginOut) * $cellWidthSet;
+		$cellMargin: 100/(100-$cellMarginOut) * $cellMarginOut;
+
+		padding: 0;
+		margin: 1% * $cellMarginOut;
+		li {
+			border-radius: 5px;
+			border:  1px solid transparent;
+			box-sizing: border-box;
+			position: relative;
+			display: inline-block;
+			width: 1% * $cellWidth;
+			//height:auto;
+			margin: 1% * $cellMargin;
+    		padding-top: 1% * $cellWidth;
+			span {
+				//background: #999;
+				position: absolute;
+			    top: 0;
+			    left: 0;
+			    bottom: 0;
+    			right: 0;
+				img {
+					width:60%;
+					height:60%;
+					margin: 5% 20%;
+					@media(max-width: $maxW){
+						margin:0 20%;
+					}
+				}
+				p{
+					margin: 10% auto;
+					font-size: 16px;
+					text-align: center;
+					line-height: 100%;
+					@media(max-width: $maxW){
+						margin:5% auto;
+						font-size: 80%;
+						line-height: 1em;
+					}
+				}
+			}
+			&:hover{
+				border: 1px solid #CFCFCF;
+				color: #FF5F00;
+			}
+		}
+	}
+	.items ul{
+		$itemImgWidth: 100px;
+		$itemPriceWidth: 190px;
+		$itemPadding: 10px;
+		$itemImgWidthMobile: 70px;
+		$itemPriceWidthMobile: 100px;
+		$itemPaddingMobile: 4px;
+		$itemMargin: 10px;
+		padding: 0;
+		margin: 0;
+		li{
+			overflow: hidden;
+			border-radius: 5px;
+			border: 1px solid #ddd;
+			display: block;
+			clear: both;
+			width:calc(100% - #{2*$itemMargin});
+			margin:10px;
+			height:$itemImgWidth + 2* $itemPadding;
+			@media(max-width: $maxW){
+				height: ($itemImgWidthMobile + 2* $itemPaddingMobile) + 20px;
+			}
+			box-sizing: border-box;
+			.item-left,.item-center,.item-right{
+				padding: $itemPadding;
+				height: $itemImgWidth;
+				@media(max-width: $maxW){
+					padding: $itemPaddingMobile;
+					height: $itemImgWidthMobile;
+				}
+				float: left;
+				display: inline-block;
+			}
+			.item-left{
+				width: $itemImgWidth;
+				@media(max-width: $maxW){
+					width: $itemImgWidthMobile;
+				}
+				padding: auto;
+				img {
+					max-width: $itemImgWidth;
+					max-height:$itemImgWidth;
+					@media(max-width: $maxW){
+						padding: 10px 0px;
+						max-width: $itemImgWidthMobile;
+						max-height: $itemImgWidthMobile;
+					}
+					margin:auto;
+				}
+
+			}
+			.item-center{
+				width:calc(100% - #{$itemImgWidth + $itemPriceWidth + 6*$itemPadding});
+				@media(max-width: $maxW){
+					width:calc(100% - #{$itemImgWidthMobile + $itemPriceWidthMobile + 6*$itemPaddingMobile});
+				}
+				h3 {
+					font: 18px $fontFam;
+					@media(max-width: $maxW){
+						font: 14px $fontFam;
+					}
+					margin:5px 0;
+					line-height: 20px;
+				}
+				p {
+					font: 12px $fontFam;
+					@media(max-width: $maxW){
+						font: 11px $fontFam;
+					}
+					margin: 5px 0;
+				}
+			}
+			.item-right{
+				text-align: center;
+				width: $itemPriceWidth;
+				@media(max-width: $maxW){
+					width: $itemPriceWidthMobile;
+				}
+				.item-price {
+					p{
+						margin: 0;
+						padding: 5px;
+						line-height: 34px;
+						font: 18px $fontFam;
+						@media(max-width: $maxW){
+							//line-height: 34px;
+							font: 13px $fontFam;
+						}
+					}
+				}
+				.item-compare-price {
+					$compareButtonColor: $niceBlue;
+					button{
+						padding: $itemPadding;
+						font: bold 14px $fontFam;
+						color: white;
+						background: -webkit-linear-gradient(lighten($compareButtonColor,10%), darken($compareButtonColor,5%));
+						background: -o-linear-gradient(lighten($compareButtonColor,10%), darken($compareButtonColor,5%));
+						background: linear-gradient(lighten($compareButtonColor,10%), darken($compareButtonColor,5%));
+						border-radius: 5px;
+						border: 1px solid darken($compareButtonColor, 10%);
+						&:hover{
+							cursor: pointer;
+							background: -webkit-linear-gradient(lighten($compareButtonColor,20%), lighten($compareButtonColor,5%));
+							background: -o-linear-gradient(lighten($compareButtonColor,20%), lighten($compareButtonColor,5%));
+							background: linear-gradient(lighten($compareButtonColor,20%), lighten($compareButtonColor,5%));
+						}
+						@media(max-width: $maxW){
+							padding: 6px;
+							font: bold 10px $fontFam;
+						}
+					}
+				}
+			}
+		}
+	}
+	.offers {
+		padding: 10px;
+		.item-description{
+			display: flex;
+			@media(max-width: $maxW){
+				display: block;
+			}
+			$galleryImgWidth: 180px;
+			height: auto;
+			.gallery{
+				font-size: 0;
+				margin:0;
+				padding:0;
+				//float: left;
+				display: inline-block;
+				width: $galleryImgWidth;
+				height: $galleryImgWidth * 4/3;
+				margin: $galleryImgWidth/10 20px;
+				@media(max-width: $maxW){
+					clear: both;
+					display: block;
+					margin: $galleryImgWidth/10 auto;
+				}
+				img{
+					//box-sizing: border-box;
+					max-width:$galleryImgWidth/3;
+					max-height:$galleryImgWidth/3;
+				}
+				span,a {
+					//box-sizing: border-box;
+					margin:0;
+					padding:0;
+					width:$galleryImgWidth/3;
+					height:$galleryImgWidth/3;
+					//display: inline-block;
+				}
+				.main{
+					width:$galleryImgWidth;
+					height:$galleryImgWidth;
+					a{
+					width:$galleryImgWidth;
+					height:$galleryImgWidth;					
+					}
+					display: block;
+					clear:both;
+					img{
+						max-width: $galleryImgWidth !important;
+						max-height:$galleryImgWidth !important;
+					}
+				}
+			}
+			.description {
+				position: relative;
+				width: calc(100% - #{$galleryImgWidth + 40px});
+				max-height: $galleryImgWidth * 4/3;
+				transition: max-height 0.5s;
+				overflow:hidden;
+				//float: left;
+				display: inline-block;
+				padding: 10px;
+				box-sizing: border-box;
+				@media(max-width: $maxW){
+					display: block;
+					width: 100%;
+				}
+				h3 {
+					font: $fontFam;
+					font-size: 24px;
+					color:$niceBlue;
+				}
+				p{
+					font: $fontFam;
+					font-size: 14px;
+					color: #333;
+				}
+			}
+			.description::before{
+				display: block;
+				background: linear-gradient(rgba(255, 255, 255, 0) 0%, $bg 90%);
+				//background: #ccc;
+				position: absolute;
+				height: 40px;
+				width:100%;
+				bottom: 0;
+				left:0;
+				content: '';
+			}
+			.description-expanded{
+				max-height:800px;
+			}
+			.description-expanded::before{
+				content: none;
+			}
+		}
+		.item-description-expand{
+			$expandArrow: 24px;
+			cursor: pointer;
+			width:100%;
+			height: $expandArrow * 1.6;
+			padding: $expandArrow*0.3 0;
+			//background: #ccc;
+			//border:1px solid black;
+			box-sizing: border-box;
+			.arrow {
+				transition: transform 0.5s;
+				transform:  scale(1,-1);
+				display: block;
+				width: $expandArrow;
+				height:$expandArrow;
+				margin: auto;		
+			}
+			img {
+				display: block;
+				width: $expandArrow;
+				height:$expandArrow;
+			}
+			&.opened .arrow{
+				transform:  scale(1,1);
+			}
+		}
+		.price-comparison{
+			$priceHeight: 50px;
+			h2{
+				padding: 0 15px;
+				color: $niceOrange;
+				font-size: 24px;
+			}
+			ul{
+				margin:0;
+				padding: 0;
+				width:100%;
+				max-height: 1500px;
+				transition: max-height 1.5s;
+				li{
+					display: flex;
+					width: 100%;
+					border-bottom: 1px solid rgba(0,0,0,0.08);
+					$buyColor: $niceOrange;
+					&:hover{
+						background: darken($bg,5%);
+					}
+					.eshop-name{
+						box-sizing: border-box;
+						padding: 0 15px;
+						display: inline-block;
+						width: calc(100% - 300px);
+						height: $priceHeight;
+						line-height: $priceHeight;
+						overflow: hidden;
+						@media(max-width: $maxW){
+							width: 60%;
+						}
+
+					}
+					.eshop-buy{
+						width: 150px;
+						display: inline-block;
+						height: $priceHeight;
+						box-sizing: border-box;
+						padding: 5px;
+						@media(max-width: $maxW){
+							width: 20%;
+						}
+						a {
+							display: block;
+							text-align: center;
+							width: 100%;
+							height:100%;
+							//line-height: $priceHeight;
+							font: bold 14px $fontFam;
+							color: white;
+							p{
+								margin:0;
+								padding: 0;
+								line-height: $priceHeight - 10px;
+							}
+							background: -webkit-linear-gradient(lighten($buyColor,10%), darken($buyColor,5%));
+							background: -o-linear-gradient(lighten($buyColor,10%), darken($buyColor,5%));
+							background: linear-gradient(lighten($buyColor,10%), darken($buyColor,5%));
+							border-radius: 5px;
+							border: 1px solid darken($buyColor, 10%);
+							&:hover{
+								cursor: pointer;
+								background: -webkit-linear-gradient(lighten($buyColor,20%), lighten($buyColor,5%));
+								background: -o-linear-gradient(lighten($buyColor,20%), lighten($buyColor,5%));
+								background: linear-gradient(lighten($buyColor,20%), lighten($buyColor,5%));
+							}
+						}
+					}
+					.eshop-price{
+						width: 150px;
+						display: inline-block;
+						height: $priceHeight;
+						@media(max-width: $maxW){
+							width: 20%;
+						}
+						p{
+							overflow: hidden;
+							font-weight: bold;
+							color: $buyColor;
+							padding:0;
+							margin: 0;
+							width:100%;
+							text-align: center;
+							height: $priceHeight;
+							line-height: $priceHeight;
+						}
+					}
+				}
+				&.collapsed {
+					max-height:$priceHeight*3;
+					overflow: hidden;
+				}
+			}
+		}
+		.loadmore{
+			width:100%;
+			text-align: center;
+			padding: 10px 0;
+			a{
+				color: $niceOrange;
+			}
+		}
+	}
+	.paginator {
+		width:100%;
+		ul{
+			width:50%;
+			text-align: center;
+			display: block;
+			margin:auto;
+			li{
+				font-weight: bold;
+				color: darken($niceBlue, 20%);
+				display: inline-block;
+				padding: 8px;
+				&.active{
+					color: $niceOrange;
+				}
+				&.disabled{
+					color: #ccc;
+				}
+			}
+		}
+	}
+}

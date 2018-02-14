@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Heureka testday</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="heureka1.0.js"></script>
+<script src="main.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+<link rel="stylesheet" href="heureka.css" type="text/css">
+</head>
+<body>
+<div class="container">
+	<header>
+		<div class="header-left">
+			<div class="hamburger-menu-wrapper">
+				<div class="hamburger-menu">
+					<span class="hamburger-line-1"></span><span class="hamburger-line-2"></span><span class="hamburger-line-3"></span>
+				</div>
+			</div>
+			<div class="logo"><img src="logo_heureka.png"></div>
+		</div>
+		<div class="header-right">
+			<div class="search-bar">
+			<form>
+				<input type="search" name="q">
+				<button type="submit">
+					<img src="search.svg">
+				</button>
+			</form>
+			</div>
+		</div>
+	</header>
+</div>
+<div class="content-container">
+	<div class="loading" style="display:block;">
+		<img src="gears.svg">
+	</div>
+	<div class="content">
+		<nav>
+			<ul>
+			</ul>
+		</nav>
+		<main>
+		<div class="categories">
+			<ul>
+			</ul>
+		</div>
+		<div class="items" style="display: none">
+			<ul>
+			</ul>
+		</div>
+		<div class="offers" style="display:none">
+			<div class="item-description">
+				<div class="gallery">
+				</div>
+				<div class="description">
+				</div>
+			</div>
+			<div class="item-description-expand">
+				<div class="arrow">
+					<img src="arrow.svg">			
+				</div>
+			</div>
+			<div class="price-comparison">
+				<h2>Srovnání cen</h2>
+				<ul>
+				</ul>
+				<div class="loadmore"><a onclick="event.preventDefault();showMoreOffers();" href="">Načíst více</a></div>
+			</div>
+		</div>
+		<div class="paginator">
+			<ul>
+				<li><a href="#">&lt;</a></li>
+				<li><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				<li><a href="#">4</a></li>
+				<li><a href="#">&gt;</a></li>
+			</ul>
+		</div>
+		<!-- -->
+		</main>
+	</div>
+</div>
+</body>
+</html>

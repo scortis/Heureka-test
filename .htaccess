@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !\.
+RewriteRule ^(.*)product-(.*)$ http://fkdesign.cz/heureka/index.html?type=product&id=$2 [R,L]
+RewriteRule ^(.*)category-(.*)-p-(.*)$ http://fkdesign.cz/heureka/index.html?type=category&id=$2&page=$3 [R,L]
+RewriteRule ^(.*)category-(.*)$ http://fkdesign.cz/heureka/index.html?type=category&id=$2 [R,L]
