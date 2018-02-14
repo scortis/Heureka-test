@@ -366,7 +366,7 @@ main {
 		$itemPriceWidth: 190px;
 		$itemPadding: 10px;
 		$itemImgWidthMobile: 70px;
-		$itemPriceWidthMobile: 140px;
+		$itemPriceWidthMobile: 120px;
 		$itemPaddingMobile: 4px;
 		$itemMargin: 10px;
 		padding: 0;
@@ -422,7 +422,7 @@ main {
 				h3 {
 					font: 18px $fontFam;
 					@media(max-width: $maxW){
-						font: bold 14px $fontFam;
+						font: bold 13px $fontFam;
 					}
 					margin:5px 0;
 					line-height: 20px;
@@ -450,7 +450,7 @@ main {
 				.item-price {
 					p{
 						margin: 0;
-						padding: 10px;
+						padding: $itemPadding $itemPadding/4;
 						line-height: 34px;
 						font: bold 18px $fontFam;
 						@media(max-width: $maxW){
@@ -462,7 +462,7 @@ main {
 				.item-compare-price {
 					$compareButtonColor: $niceBlue;
 					button{
-						padding: $itemPadding;
+						padding: $itemPadding $itemPadding/4;
 						font: bold 14px $fontFam;
 						color: white;
 						background: -webkit-linear-gradient(lighten($compareButtonColor,10%), darken($compareButtonColor,5%));
