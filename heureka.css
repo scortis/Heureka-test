@@ -33,6 +33,7 @@ header {
     display: block;
     float: left; }
     header .header-left .logo {
+      cursor: pointer;
       float: left;
       height: 99px;
       box-sizing: border-box;
@@ -225,7 +226,7 @@ nav {
       height: 50px;
       line-height: 50px;
       padding: 0 15px; }
-      nav ul li:hover {
+      nav ul li:hover, nav ul li.active {
         cursor: pointer;
         background: linear-gradient(#edad68, #e7943b);
         color: white;

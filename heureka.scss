@@ -55,6 +55,7 @@ header {
 		display: block;
 		float: left;
 		.logo {
+			cursor: pointer;
 			float: left;
 			height: $headerHeight - 1px;
 			box-sizing: border-box;
@@ -278,7 +279,7 @@ nav {
 			height: $menuHeight;
 			line-height: $menuHeight;
 			padding: 0 15px;
-			&:hover{
+			&:hover, &.active {
 				cursor: pointer;
 				background: linear-gradient(lighten($menuColor,10%), $menuColor);
 				color:white;

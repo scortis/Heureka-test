@@ -2,7 +2,7 @@
 var productsPerPage = 5;
 var loadTimeout = 0;
 var state = {}; // variable for storing the current state
-
+var navSelected = 0;
 // decoding URL params
 $.urlParam = function(name){
     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -19,6 +19,10 @@ var afterLoadCatg = function(show){
 	if(typeof(show) === 'undefined'){
 		show = 1;
 	}
+	// Update menu bar
+	navSelected = 0;
+	updateNavbar();
+
 	console.log(show);
 	switchLoading(0);
 	$("nav ul").html('');
@@ -61,6 +65,27 @@ function switchLoading(toggle){
 	}
 }
 
+// Show the main category selection
+function showMainPage(){
+	//Hide the unwanted sections
+	$(".categories").css("display","block");
+	$(".offers").css("display","none");
+	$(".items").css("display","none");
+	$(".paginator").css("display","none");
+	$('title').html('Heureka');
+
+	// Update menu bar
+	navSelected = 0;
+	updateNavbar();
+
+	window.history.pushState(null, 'Heureka','./');
+}
+
+// highlight selected category in navbar
+function updateNavbar(){
+	$('nav ul li').removeClass('active');
+	$('nav ul li#nav'+navSelected).addClass('active');
+}
 // Function for showing a products from specifioc category
 // Function has a callback afterLoadProducts which handles the main functionality after data loading
 
@@ -122,6 +147,9 @@ function showCategory(cid, page, pushState){
 				else window.history.pushState({type:'category',id:cid, pg:page}, 'Heureka - '+h.categories[cid].title,'./category-'+cid+'-p-'+page);
 			}
 			
+			// Update menu bar
+			navSelected = cid;
+			updateNavbar();
 			//Hide the unwanted sections
 			$(".categories").css("display","none");
 			$(".offers").css("display","none");
@@ -224,6 +252,10 @@ function showOffers(prodid, pushState){
 	if(pushState)
 		window.history.pushState({type:'product',id:prodid}, 'Heureka - '+h.categories[cid].products[prodid].title,'./product-'+prodid);
 	
+	// Update menu bar
+	navSelected = cid;
+	updateNavbar();
+
 	// Hide the unwanted sections
 	$(".categories").css("display","none");
 	$(".offers").css("display","block");
